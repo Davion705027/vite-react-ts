@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { login } from "../../api/user";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken } from "../../store/features/tokenSlice";
 
 type FieldType = {
   username?: string;
@@ -9,10 +11,14 @@ type FieldType = {
 };
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
+  const {value} = useSelector((store:any)=>store.token);
 //   const [form] = Form.useForm();
   const onFinish = async (values: any) => {
     const res = await login(values);
-    console.log(res);
+    const token = res.data.data;
+    dispatch(setToken({value:token}));
+    // console.log(res);
   };
   
   const onFinishFailed = (errorInfo: any) => {

@@ -16,8 +16,13 @@ export const counterSlice = createSlice({
   // 定义 reducers 并生成关联的操作
   reducers: {
     // 定义一个加的方法
-    increment: (state) => {
-      state.value += 1;
+    increment: (state,action) => {
+      const payload = action.payload;
+      const type = action.type;
+      // console.log(type);
+      // console.log(payload);
+      
+      state.value += payload.value;
     },
     // 定义一个减的方法
     decrement: (state) => {
