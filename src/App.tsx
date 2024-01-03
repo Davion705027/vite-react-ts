@@ -4,6 +4,7 @@ import { Button, Card } from 'antd'
 import Login from './pages/login'
 import { useDispatch, useSelector } from 'react-redux'
 import { decrement, increment } from './store/features/counterSlice'
+import Counter from './pages/home/count'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,6 +18,9 @@ function App() {
     <>
       <Card>
         <Login></Login>  
+      </Card>
+      <Card style={{marginTop:10}}>
+        <Counter></Counter>
       </Card>
         <p>{value}</p>
         <input value={count} onChange={(e)=>setCount(+e.target.value)}></input>
