@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react";
-import store from "../../../redux/myredux"
-console.log(store.getState());
+import { connect } from "react-redux";
+import { stateReducer } from "../../../store";
 
-const Counter:React.FC = () => {
-    const state = store.getState()
+const Counter:React.FC = (props) => {
+    console.log(props);
+    
     const [count,setCount] = useState(0)
-
-    useEffect(()=>{
-        store.subscribe(()=>{
-            setCount(Math.random()); // 随机数 每次都会更新
-            // setCount(count+1); // 只会触发一次更新 因为count只会赋值为1
-        });
-    },[])
     return <div>
-        <div> {state.num}</div>
+        123
+        {/* <div> {state.num}</div>
         <button onClick={()=>{
             store.dispatch({
-            type:'ADD'
-        })
-        }}>加</button>
+                type:'ADD'
+            })
+        }}>加</button> */}
     </div>
 }
-export default Counter
+
+export default connect(
+    (state:stateReducer)=>{
+        // console.log(state);
+        return state.counter;
+    },
+    (dispatch)=>{
+        return 1;
+    },
+)(Counter);

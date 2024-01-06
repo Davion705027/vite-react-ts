@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { Reducer, configureStore } from "@reduxjs/toolkit";
 import counterSlice from "./features/counterSlice.ts";
 import tokenSlice from "./features/tokenSlice.ts";
 
@@ -10,5 +10,9 @@ const store = configureStore({
     token: tokenSlice
   },
 });
+ export interface stateReducer {
+  counter: Reducer;
+  token: Reducer;
+ }
 
-export default store;
+ export default store;
