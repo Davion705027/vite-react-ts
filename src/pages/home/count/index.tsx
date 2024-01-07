@@ -1,28 +1,22 @@
-import { useEffect, useState } from "react";
-import { connect } from "react-redux";
+/** react-redux **/
+// import { connect } from "react-redux";
 import { stateReducer } from "../../../store";
+import { countAction } from "../../../redux/actions/count";
+import { connect } from "../../../redux/my-react-redux";
 
-const Counter:React.FC = (props) => {
-    console.log(props);
-    
-    const [count,setCount] = useState(0)
+interface IProps {
+    num:number;
+    add:()=>void;
+}
+const Counter = (props:IProps) => {
+    let {num,add} = props;
     return <div>
-        123
-        {/* <div> {state.num}</div>
-        <button onClick={()=>{
-            store.dispatch({
-                type:'ADD'
-            })
-        }}>加</button> */}
+        <div> {num}</div>
+        <button onClick={add}>加</button>
     </div>
 }
 
 export default connect(
-    (state:stateReducer)=>{
-        // console.log(state);
-        return state.counter;
-    },
-    (dispatch)=>{
-        return 1;
-    },
+    (state:stateReducer)=>state.counter,
+    countAction,
 )(Counter);
