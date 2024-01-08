@@ -5,6 +5,8 @@ import Login from './pages/login'
 import { useDispatch, useSelector } from 'react-redux'
 import { decrement, increment } from './store/features/counterSlice'
 import Counter from './pages/home/count'
+import { HashRouter } from 'react-router-dom'
+import Router from './routers'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,6 +15,12 @@ function App() {
    const {value} = useSelector((store:any)=>store.counter)
    // 通过useDispatch 派发事件
    const dispatch = useDispatch()
+
+   return (
+    <HashRouter>
+      <Router/>
+    </HashRouter> 
+   )
 
   return (
     <>

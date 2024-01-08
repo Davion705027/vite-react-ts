@@ -13,6 +13,10 @@ const axiosInstance: AxiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     // 在请求发送之前可以进行一些处理，比如添加请求头等
+    let token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = token;
+    }
     return config;
   },
   (error) => {
@@ -24,7 +28,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     // 在这里可以对响应数据进行处理
-    return response;
+    return response.data;
   },
   (error) => {
     if (error.response?.status === 401) {

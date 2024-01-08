@@ -3,6 +3,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { login } from "../../api/user";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../store/features/tokenSlice";
+import { useNavigate } from "react-router-dom";
 
 type FieldType = {
   username?: string;
@@ -12,13 +13,19 @@ type FieldType = {
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
-  const {value} = useSelector((store:any)=>store.token);
+  const nevigate = useNavigate()
+  // const {value} = useSelector((store:any)=>store.token);
 //   const [form] = Form.useForm();
   const onFinish = async (values: any) => {
     const res = await login(values);
-    const token = res.data.data;
+    const token = res.data; 
     dispatch(setToken({value:token}));
+    localStorage.setItem('token',token)
     // console.log(res);
+
+    // react routerv6 如何跳转页面
+    nevigate('/project')
+
   };
   
   const onFinishFailed = (errorInfo: any) => {
