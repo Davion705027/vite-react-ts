@@ -2,7 +2,7 @@ const state = {
     num:1
 }
 const counterReducer = function reducer(initialState = state,action:any){
-    console.log(initialState);
+    // console.log(initialState);
     
     switch(action.type){
         case 'ADD':

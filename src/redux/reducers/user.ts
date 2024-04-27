@@ -2,7 +2,7 @@ const state = {
     age:''
 }
 const userReducer = function reducer(initialState = state,action:any){
-    console.log(initialState);
+    // console.log(initialState);
     
     switch(action.type){
         case 'SET_NAME':

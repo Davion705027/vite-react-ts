@@ -1,6 +1,8 @@
 import { Navigate, RouteObject, useRoutes } from "react-router-dom";
 import Login from "../pages/login";
 import Project from "../pages/project";
+import Calendar from "../pages/calendar";
+import Home from "../pages/home";
 
 // * 导入所有router
 // const metaRouters = import.meta.globEager("./modules/*.tsx");
@@ -23,21 +25,29 @@ import Project from "../pages/project";
 export const rootRouter:RouteObject[] = [
     {
 		path: "/",
-		element: <Navigate to="/login" />
+		element: <Navigate to="/project" />
+	},
+	{
+		path: "/home",
+		element: <Home />,
 	},
 	{
 		path: "/login",
 		element: <Login />,
         
-		meta: {
-			requiresAuth: false,
-			title: "登录页",
-			key: "login"
-		}
+		// meta: {
+		// 	requiresAuth: false,
+		// 	title: "登录页",
+		// 	key: "login"
+		// }
 	},
 	{
 		path: "/project",
 		element: <Project />,
+	},
+	{
+		path: "/calendar",
+		element: <Calendar />,
 	},
 ]
 
