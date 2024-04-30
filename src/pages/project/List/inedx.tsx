@@ -14,6 +14,13 @@ export function List(props: IListProps) {
         list.filter(item => activeKey=='0'? !item.finished : item.finished)
     ) 
   };
+  const handleUnFinish = (item: ITodo) => {
+    item.finished = false;
+
+    setShowList(
+        list.filter(item => activeKey=='0'? !item.finished : item.finished)
+    ) 
+  };
 
   const items: TabsProps['items'] = [
     {
@@ -23,7 +30,8 @@ export function List(props: IListProps) {
     {
       key: '1',
       label: '已完成',
-    },]
+    }
+]
 
   const [activeKey,setActiveKey] = useState(items[0].key);  
   const [showList,setShowList] = useState<ITodo[]>([]);
@@ -35,14 +43,19 @@ export function List(props: IListProps) {
   },[activeKey,list])
 
   return (
+    
     <div>
       <h1>List</h1>
         <Tabs defaultActiveKey={activeKey} items={items} onChange={setActiveKey}></Tabs>
+
+
+
         {showList.map((item,index) => {
+            let btn = activeKey == '0' ? <Button onClick={() => handleFinish(item)}>完成</Button> : <Button onClick={() => handleUnFinish(item)}>未完成</Button>;
             return (
             <div key={index}>
                 {item.title} <Space></Space>
-                <Button onClick={() => handleFinish(item)}>完成</Button>
+                {btn}
             </div>
             );
         })}

@@ -1,16 +1,18 @@
 import { Button, Input } from "antd";
-import { Fragment, forwardRef, useImperativeHandle, useState } from "react"
+import { Fragment, forwardRef, useEffect, useImperativeHandle, useInsertionEffect, useLayoutEffect, useState } from "react"
 
 
 export interface IAddProps {
     add: (item:ITodo)=>void
 }
 const Add = forwardRef((props:IAddProps,ref)=>{
-    const [todo,setTodo] = useState<ITodo>({title:''});
+    const [todo,setTodo] = useState<ITodo>({title:'',finished:false});
+    const {add} = props;
     const handleAdd = ()=>{
         // console.log('handleAdd',todo);
         if(!todo.title)return;
-        props.add(todo);
+        
+        add(todo);
     }
 
     // 像父组件暴露方法
@@ -18,6 +20,16 @@ const Add = forwardRef((props:IAddProps,ref)=>{
         handleAdd
     }))
 
+
+    // useEffect(()=>{
+    //     console.warn('add useEffect')
+    // },[])
+    // useLayoutEffect(()=>{
+    //     console.warn('add useLayoutEffect')
+    // },[])
+    // useInsertionEffect(()=>{
+    //     console.warn('add useInsertionEffect')
+    // },[])
 
 
     return (
