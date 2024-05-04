@@ -3,6 +3,8 @@ import Login from "../pages/login";
 import Project from "../pages/project";
 import Calendar from "../pages/calendar";
 import Home from "../pages/home";
+import { Contact } from "../pages/contact";
+import Task from "../pages/task";
 
 // * 导入所有router
 // const metaRouters = import.meta.globEager("./modules/*.tsx");
@@ -25,7 +27,7 @@ import Home from "../pages/home";
 export const rootRouter:RouteObject[] = [
     {
 		path: "/",
-		element: <Navigate to="/project" />
+		element: <Navigate to="/task" />
 	},
 	{
 		path: "/home",
@@ -44,6 +46,14 @@ export const rootRouter:RouteObject[] = [
 	{
 		path: "/project",
 		element: <Project />,
+	},
+	{
+		path: "/contact",
+		element: <Contact />,
+	},
+	{
+		path: "/task",
+		element: <Task />,
 	},
 	{
 		path: "/calendar",

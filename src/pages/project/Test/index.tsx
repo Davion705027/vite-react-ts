@@ -46,11 +46,32 @@ function sleep(duration:number) {
 
 
   return (
-    <div>
+    <div onClickCapture={(e)=>{
+      console.log('onClickCapture',e.target);
+      
+    }}>
       {count}
-      <button onClick={()=>{
-        setCount(0)
+
+      <form onSubmit={(e) =>{
+         alert('提交表单！');
+         e.preventDefault()
+      }}>
+        <input />
+        <button>发送</button>
+      </form>
+    
+
+      <div onClickCapture={(e)=>{
+        console.log('onClickCapture inner2',e.target);
+      }}>
+        inner2
+        <button onClick={(e)=>{
+          // e.stopPropagation();
+          console.log('inner',e.target);
+          setCount(0)
       }}>点击</button>
+      </div>
+
     <input type="text" onInput={(e)=>{
       setStr(e.target.value);
     }}/>
