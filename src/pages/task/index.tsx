@@ -15,19 +15,23 @@ export default function Task (props: ITaskProps) {
     function handleDeleteTask(taskId:number){
         dispatch({type:'DELETE_TASK',id:taskId})
     }
+    function handleChangeTask(task:Itask){
+        dispatch({type:'CHANGE_TASK',task:task})
+    }
   return (
     <Card>
         <AddTask onAdd={handleAddTask}></AddTask>
-        <TaskList tasks={tasks} onDeleteTask={handleDeleteTask}></TaskList>
+        <TaskList tasks={tasks} onDeleteTask={handleDeleteTask} onChangeTask={handleChangeTask}></TaskList>
     </Card>
   );
 }
 
-type actionType = 'ADD_TASK' | 'DELETE_TASK'
+type actionType = 'ADD_TASK' | 'DELETE_TASK'| 'CHANGE_TASK'
 interface ActionType {
     type: actionType,
     id:number,
-    text?:string
+    text?:string,
+    task?:Itask
 }
 
 function tasksReducer(tasks:Itask[],action:ActionType){
@@ -44,6 +48,13 @@ function tasksReducer(tasks:Itask[],action:ActionType){
             ]
         case 'DELETE_TASK':
             return tasks.filter(task=>task.id!==action.id)
+        case 'CHANGE_TASK':
+            return tasks.map(task=>{
+                if(task.id===action?.task?.id){
+                    return action.task
+                }
+                return task
+            })
         default:
             return tasks
     }
